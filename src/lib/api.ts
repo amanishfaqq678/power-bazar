@@ -9,6 +9,7 @@ import type {
   ProductImage,
 } from "./types";
 import { notifyNewInquiry } from "@/services/automation";
+import { PRODUCT_IMAGE_BUCKET } from "@/config/site";
 
 /* ---------------------------------- data access layer ----------------------
  * All database access lives here so presentation components never talk to the
@@ -253,16 +254,20 @@ export async function updateInventory(
   if (productError) throw productError;
 }
 
+/** Uploads to the private product image store and returns a long-lived signed URL. */
 export async function uploadProductImage(file: File): Promise<string> {
   const ext = file.name.split(".").pop() ?? "jpg";
   const path = `${crypto.randomUUID()}.${ext}`;
-  const { error } = await supabase.storage.from("product-images").upload(path, file, {
+  const { error } = await supabase.storage.from(PRODUCT_IMAGE_BUCKET).upload(path, file, {
     cacheControl: "3600",
     upsert: false,
   });
   if (error) throw error;
-  const { data } = supabase.storage.from("product-images").getPublicUrl(path);
-  return data.publicUrl;
+  const { data, error: signError } = await supabase.storage
+    .from(PRODUCT_IMAGE_BUCKET)
+    .createSignedUrl(path, 60 * 60 * 24 * 365 * 5);
+  if (signError || !data) throw signError ?? new Error("Could not create image URL");
+  return data.signedUrl;
 }
 
 export function slugify(value: string) {
