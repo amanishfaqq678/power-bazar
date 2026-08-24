@@ -40,7 +40,10 @@ function CategoriesPage() {
           <ErrorState title="Categories unavailable" onRetry={() => categoriesQuery.refetch()} />
         ) : null}
         {categoriesQuery.data?.length === 0 ? (
-          <EmptyState title="No categories yet" description="Categories added in the admin panel appear here." />
+          <EmptyState
+            title="No categories yet"
+            description="Categories added in the admin panel appear here."
+          />
         ) : null}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {categoriesQuery.data?.map((category) => (

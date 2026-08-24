@@ -38,7 +38,10 @@ const KEYWORDS: Array<{ terms: string[]; slug: string }> = [
   },
   { terms: ["wire", "cable", "conduit", "pipe", "wiring"], slug: "wiring-accessories" },
   { terms: ["home", "house", "ceiling", "rose", "holder"], slug: "home-electrical" },
-  { terms: ["accessory", "accessories", "clip", "connector", "spare"], slug: "electrical-accessories" },
+  {
+    terms: ["accessory", "accessories", "clip", "connector", "spare"],
+    slug: "electrical-accessories",
+  },
 ];
 
 export async function buildCatalogueContext() {

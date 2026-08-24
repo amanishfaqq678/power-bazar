@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import logo from "@/assets/power-bazar-logo.png.asset.json";
+import logo from "@/assets/power-bazar-logo.png";
 import { CATEGORY_NAV, site } from "@/config/site";
 
 export function Footer() {
@@ -8,7 +8,7 @@ export function Footer() {
       <div className="container-pb grid gap-12 py-14 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <img
-            src={logo.url}
+            src={logo}
             alt="Power Bazar"
             width={180}
             height={120}
@@ -47,7 +47,7 @@ export function Footer() {
             {[
               { label: "About", to: "/about" },
               { label: "Support", to: "/support" },
-              { label: "Contact", to: "/contact" },
+              { label: "Browse Products", to: "/products" },
             ].map((item) => (
               <li key={item.to}>
                 <Link
@@ -106,8 +106,12 @@ export function Footer() {
       <div className="border-t border-border">
         <div className="container-pb flex flex-col gap-2 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Power Bazar. All rights reserved.</p>
-          <Link to="/admin/login" className="font-bold transition-colors hover:text-primary">
-            Staff Login
+          <Link
+            to="/admin/login"
+            className="text-xs text-muted-foreground transition-colors hover:text-primary"
+            aria-label="Admin Portal"
+          >
+            Admin Portal
           </Link>
         </div>
       </div>

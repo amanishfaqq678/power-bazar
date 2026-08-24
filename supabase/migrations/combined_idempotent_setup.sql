@@ -13,7 +13,7 @@ BEGIN
   IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'app_role' AND typnamespace = 'public'::regnamespace) THEN
     EXECUTE $$CREATE TYPE public.app_role AS ENUM ('admin','staff');$$;
   END IF;
-END
+END;
 $$ LANGUAGE plpgsql;
 
 ------------------------
@@ -240,7 +240,7 @@ BEGIN
   IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE policyname = 'staff manage quote items' AND schemaname = 'public' AND tablename = 'quote_items') THEN
     EXECUTE $$CREATE POLICY "staff manage quote items" ON public.quote_items FOR ALL TO authenticated USING (public.is_staff(auth.uid())) WITH CHECK (public.is_staff(auth.uid()));$$;
   END IF;
-END
+END;
 $$ LANGUAGE plpgsql;
 
 ------------------------
@@ -269,7 +269,7 @@ BEGIN
       EXECUTE $$CREATE TRIGGER on_auth_user_created AFTER INSERT ON auth.users FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();$$;
     END IF;
   END IF;
-END
+END;
 $$ LANGUAGE plpgsql;
 
 ------------------------
@@ -296,7 +296,7 @@ BEGIN
   IF fcount > 0 THEN
     EXECUTE $$REVOKE ALL ON FUNCTION public.handle_new_user() FROM PUBLIC, anon, authenticated;$$;
   END IF;
-END
+END;
 $$ LANGUAGE plpgsql;
 
 ------------------------
@@ -316,7 +316,7 @@ BEGIN
   IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE policyname = 'staff delete product images' AND schemaname = 'storage' AND tablename = 'objects') THEN
     EXECUTE $$CREATE POLICY "staff delete product images" ON storage.objects FOR DELETE TO authenticated USING (bucket_id = 'product-images' AND public.is_staff(auth.uid()));$$;
   END IF;
-END
+END;
 $$ LANGUAGE plpgsql;
 
 ------------------------

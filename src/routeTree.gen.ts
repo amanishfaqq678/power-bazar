@@ -10,13 +10,50 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AiAssistantRouteImport } from './routes/ai-assistant'
+import { Route as RequestQuoteRouteImport } from './routes/request-quote'
+import { Route as SupportRouteImport } from './routes/support'
+import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as CategoriesIndexRouteImport } from './routes/categories.index'
 import { Route as CategoriesSlugRouteImport } from './routes/categories.$slug'
 import { Route as ProductsIndexRouteImport } from './routes/products.index'
+import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiAssistantRoute = AiAssistantRouteImport.update({
+  id: '/ai-assistant',
+  path: '/ai-assistant',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RequestQuoteRoute = RequestQuoteRouteImport.update({
+  id: '/request-quote',
+  path: '/request-quote',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SupportRoute = SupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminDashboardRoute = AdminDashboardRouteImport.update({
+  id: '/admin/dashboard',
+  path: '/admin/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CategoriesIndexRoute = CategoriesIndexRouteImport.update({
@@ -34,37 +71,104 @@ const ProductsIndexRoute = ProductsIndexRouteImport.update({
   path: '/products/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductsSlugRoute = ProductsSlugRouteImport.update({
+  id: '/products/$slug',
+  path: '/products/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/ai-assistant': typeof AiAssistantRoute
+  '/request-quote': typeof RequestQuoteRoute
+  '/support': typeof SupportRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/login': typeof AdminLoginRoute
   '/categories/$slug': typeof CategoriesSlugRoute
+  '/products/$slug': typeof ProductsSlugRoute
   '/categories/': typeof CategoriesIndexRoute
   '/products/': typeof ProductsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/ai-assistant': typeof AiAssistantRoute
+  '/request-quote': typeof RequestQuoteRoute
+  '/support': typeof SupportRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/login': typeof AdminLoginRoute
   '/categories/$slug': typeof CategoriesSlugRoute
+  '/products/$slug': typeof ProductsSlugRoute
   '/categories': typeof CategoriesIndexRoute
   '/products': typeof ProductsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/ai-assistant': typeof AiAssistantRoute
+  '/request-quote': typeof RequestQuoteRoute
+  '/support': typeof SupportRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/login': typeof AdminLoginRoute
   '/categories/$slug': typeof CategoriesSlugRoute
+  '/products/$slug': typeof ProductsSlugRoute
   '/categories/': typeof CategoriesIndexRoute
   '/products/': typeof ProductsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/categories/$slug' | '/categories/' | '/products/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/ai-assistant'
+    | '/request-quote'
+    | '/support'
+    | '/admin/dashboard'
+    | '/admin/login'
+    | '/categories/$slug'
+    | '/products/$slug'
+    | '/categories/'
+    | '/products/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/categories/$slug' | '/categories' | '/products'
-  id: '__root__' | '/' | '/categories/$slug' | '/categories/' | '/products/'
+  to:
+    | '/'
+    | '/about'
+    | '/ai-assistant'
+    | '/request-quote'
+    | '/support'
+    | '/admin/dashboard'
+    | '/admin/login'
+    | '/categories/$slug'
+    | '/products/$slug'
+    | '/categories'
+    | '/products'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/ai-assistant'
+    | '/request-quote'
+    | '/support'
+    | '/admin/dashboard'
+    | '/admin/login'
+    | '/categories/$slug'
+    | '/products/$slug'
+    | '/categories/'
+    | '/products/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AiAssistantRoute: typeof AiAssistantRoute
+  RequestQuoteRoute: typeof RequestQuoteRoute
+  SupportRoute: typeof SupportRoute
+  AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminLoginRoute: typeof AdminLoginRoute
   CategoriesSlugRoute: typeof CategoriesSlugRoute
+  ProductsSlugRoute: typeof ProductsSlugRoute
   CategoriesIndexRoute: typeof CategoriesIndexRoute
   ProductsIndexRoute: typeof ProductsIndexRoute
 }
@@ -76,6 +180,48 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-assistant': {
+      id: '/ai-assistant'
+      path: '/ai-assistant'
+      fullPath: '/ai-assistant'
+      preLoaderRoute: typeof AiAssistantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/request-quote': {
+      id: '/request-quote'
+      path: '/request-quote'
+      fullPath: '/request-quote'
+      preLoaderRoute: typeof RequestQuoteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/support': {
+      id: '/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof SupportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/dashboard': {
+      id: '/admin/dashboard'
+      path: '/admin/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/categories/': {
@@ -99,12 +245,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products/$slug': {
+      id: '/products/$slug'
+      path: '/products/$slug'
+      fullPath: '/products/$slug'
+      preLoaderRoute: typeof ProductsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AiAssistantRoute: AiAssistantRoute,
+  RequestQuoteRoute: RequestQuoteRoute,
+  SupportRoute: SupportRoute,
+  AdminDashboardRoute: AdminDashboardRoute,
+  AdminLoginRoute: AdminLoginRoute,
   CategoriesSlugRoute: CategoriesSlugRoute,
+  ProductsSlugRoute: ProductsSlugRoute,
   CategoriesIndexRoute: CategoriesIndexRoute,
   ProductsIndexRoute: ProductsIndexRoute,
 }

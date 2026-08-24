@@ -40,9 +40,7 @@ export function QuoteBasketProvider({ children }: { children: ReactNode }) {
       const existing = current.find((item) => item.productId === product.id);
       if (existing) {
         return current.map((item) =>
-          item.productId === product.id
-            ? { ...item, quantity: item.quantity + quantity }
-            : item,
+          item.productId === product.id ? { ...item, quantity: item.quantity + quantity } : item,
         );
       }
       return [

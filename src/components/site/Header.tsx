@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Menu, Search, Sparkles, X, FileText } from "lucide-react";
-import logo from "@/assets/power-bazar-logo.png.asset.json";
+import logo from "@/assets/power-bazar-logo.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useQuoteBasket } from "@/lib/quote-basket";
@@ -34,7 +34,7 @@ export function Header() {
     event.preventDefault();
     setSearchOpen(false);
     setMenuOpen(false);
-    navigate({ to: "/products", search: { q: term || undefined } });
+    navigate({ to: "/products", search: { q: term || undefined, category: undefined } });
   }
 
   return (
@@ -47,7 +47,7 @@ export function Header() {
       <div className="container-pb flex h-18 items-center justify-between gap-4 py-3">
         <Link to="/" className="flex shrink-0 items-center" aria-label="Power Bazar home">
           <img
-            src={logo.url}
+            src={logo}
             alt="Power Bazar — Powering Your World"
             width={180}
             height={120}
@@ -80,11 +80,7 @@ export function Header() {
             <Search className="size-5" aria-hidden="true" />
           </Button>
 
-          <Button
-            asChild
-            variant="ghost"
-            className="hidden font-bold lg:inline-flex"
-          >
+          <Button asChild variant="ghost" className="hidden font-bold lg:inline-flex">
             <Link to="/ai-assistant">
               <Sparkles className="size-4" aria-hidden="true" />
               AI Assistant
@@ -92,14 +88,14 @@ export function Header() {
           </Button>
 
           <Button asChild className="hidden rounded-full font-extrabold lg:inline-flex">
-            <Link to="/request-quote">
+            <a href="/request-quote">
               Request a Quote
               {count > 0 ? (
                 <span className="ml-1 rounded-full bg-primary-foreground/20 px-1.5 text-xs">
                   {count}
                 </span>
               ) : null}
-            </Link>
+            </a>
           </Button>
 
           <Button
@@ -163,10 +159,10 @@ export function Header() {
               </Link>
             ))}
             <Button asChild className="mt-3 h-12 rounded-full font-extrabold">
-              <Link to="/request-quote" onClick={() => setMenuOpen(false)}>
+              <a href="/request-quote" onClick={() => setMenuOpen(false)}>
                 <FileText className="size-4" aria-hidden="true" />
                 Request a Quote{count > 0 ? ` (${count})` : ""}
-              </Link>
+              </a>
             </Button>
           </nav>
         </div>

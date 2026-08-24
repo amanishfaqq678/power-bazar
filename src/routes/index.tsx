@@ -71,7 +71,7 @@ function Home() {
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Button asChild size="lg" className="h-12 rounded-full px-7 font-extrabold">
-                <Link to="/products">
+                <Link to="/products" search={{ q: undefined, category: undefined }}>
                   Explore Products
                   <ArrowRight className="size-4" aria-hidden="true" />
                 </Link>
@@ -82,7 +82,7 @@ function Home() {
                 variant="outline"
                 className="h-12 rounded-full px-7 font-extrabold"
               >
-                <Link to="/request-quote">Request a Quote</Link>
+                <a href="/request-quote">Request a Quote</a>
               </Button>
             </div>
           </div>
@@ -144,7 +144,9 @@ function Home() {
           <div className="flex flex-wrap items-end justify-between gap-6">
             <SectionHeading eyebrow="Featured" title="Popular right now." />
             <Button asChild variant="outline" className="rounded-full font-bold">
-              <Link to="/products">View all products</Link>
+              <Link to="/products" search={{ q: undefined, category: undefined }}>
+                View all products
+              </Link>
             </Button>
           </div>
           <div className="mt-10">
@@ -228,7 +230,9 @@ function Home() {
             variant="secondary"
             className="h-12 shrink-0 rounded-full px-7 font-extrabold"
           >
-            <Link to="/products">Explore Products</Link>
+            <Link to="/products" search={{ q: undefined, category: undefined }}>
+              Explore Products
+            </Link>
           </Button>
         </div>
       </section>
@@ -277,10 +281,15 @@ function Home() {
             variant="outline"
             className="h-12 rounded-full px-7 font-extrabold"
           >
-            <Link to="/request-quote">Request a quote</Link>
+            <a href="/request-quote">Request a quote</a>
           </Button>
-          <Button asChild size="lg" variant="ghost" className="h-12 rounded-full px-7 font-extrabold">
-            <Link to="/contact">Contact Power Bazar</Link>
+          <Button
+            asChild
+            size="lg"
+            variant="ghost"
+            className="h-12 rounded-full px-7 font-extrabold"
+          >
+            <Link to="/support">Get Support</Link>
           </Button>
         </div>
       </section>
@@ -297,7 +306,7 @@ function Home() {
               request form and the team will get back to you.
             </p>
             <Button asChild className="mt-6 rounded-full font-bold">
-              <Link to="/request-quote">Send an inquiry</Link>
+              <a href="/request-quote">Send an inquiry</a>
             </Button>
           </div>
         </div>

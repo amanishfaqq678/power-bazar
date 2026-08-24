@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { createInquiry } from "@/lib/api";
-import type { Product, QuoteItem } from "@/lib/types";
+import type { InquiryInput, Product, QuoteItem } from "@/lib/types";
 import { useQuoteBasket } from "@/lib/quote-basket";
 
 const schema = z.object({
@@ -60,7 +60,7 @@ export function InquiryForm({
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <Button asChild variant="outline" className="rounded-full font-bold">
-            <Link to="/products">Continue browsing</Link>
+            <a href="/products">Continue browsing</a>
           </Button>
           <Button
             className="rounded-full font-bold"
@@ -97,15 +97,18 @@ export function InquiryForm({
     }
 
     setErrors({});
-    mutation.mutate({
+    const payload: InquiryInput = {
       customer_name: parsed.data.customer_name,
       phone: parsed.data.phone,
       email: parsed.data.email || null,
       product_id: product?.id ?? null,
       quantity: parsed.data.quantity,
       message: parsed.data.message || null,
-      items,
-    });
+    };
+    if (items && items.length > 0) {
+      payload.items = items;
+    }
+    mutation.mutate(payload);
   }
 
   return (
@@ -212,7 +215,11 @@ function Field({
   label,
   error,
   ...props
-}: React.InputHTMLAttributes<HTMLInputElement> & { id: string; label: string; error?: string }) {
+}: React.InputHTMLAttributes<HTMLInputElement> & {
+  id: string;
+  label: string;
+  error?: string | undefined;
+}) {
   return (
     <div>
       <Label htmlFor={id} className="font-bold">

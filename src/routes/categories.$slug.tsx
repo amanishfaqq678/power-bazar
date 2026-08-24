@@ -3,7 +3,12 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { PageHeader, SiteLayout } from "@/components/site/SiteLayout";
 import { ProductGrid } from "@/components/catalog/ProductCard";
-import { EmptyState, ErrorState, LoadingState, ProductGridSkeleton } from "@/components/common/states";
+import {
+  EmptyState,
+  ErrorState,
+  LoadingState,
+  ProductGridSkeleton,
+} from "@/components/common/states";
 import { fetchCategoryBySlug, fetchProducts } from "@/lib/api";
 import { categoryImage } from "@/lib/product-images";
 import { FilterSelect } from "./products.index";
@@ -52,7 +57,10 @@ function CategoryPage() {
 
   const filtered = useMemo(() => {
     return (productsQuery.data ?? []).filter((product) => {
-      if (term && !`${product.name} ${product.sku ?? ""}`.toLowerCase().includes(term.toLowerCase()))
+      if (
+        term &&
+        !`${product.name} ${product.sku ?? ""}`.toLowerCase().includes(term.toLowerCase())
+      )
         return false;
       if (availability !== "all" && product.availability !== availability) return false;
       return true;
@@ -95,7 +103,11 @@ function CategoryPage() {
 
   return (
     <SiteLayout>
-      <PageHeader eyebrow="Category" title={category.name} description={category.description ?? undefined}>
+      <PageHeader
+        eyebrow="Category"
+        title={category.name}
+        {...(category.description ? { description: category.description } : {})}
+      >
         <nav aria-label="Breadcrumb" className="mt-6 text-sm text-muted-foreground">
           <Link to="/" className="hover:text-primary">
             Home
@@ -146,7 +158,7 @@ function CategoryPage() {
           />
           <div className="flex items-end">
             <Button asChild variant="outline" className="h-11 w-full rounded-full font-bold">
-              <Link to="/request-quote">Request a Quote</Link>
+              <a href="/request-quote">Request a Quote</a>
             </Button>
           </div>
         </div>
