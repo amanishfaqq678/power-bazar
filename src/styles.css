@@ -124,6 +124,19 @@
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
   }
+
+  /* Make selected text readable: use a dark text color on selection. */
+  ::selection {
+    /* Keep the accent selection background in line with brand — use system highlight fallback */
+    background-color: Highlight;
+    color: #000 !important;
+  }
+
+  /* Also support Firefox older selector */
+  ::-moz-selection {
+    background-color: Highlight;
+    color: #000 !important;
+  }
 }
 
 @utility container-pb {
