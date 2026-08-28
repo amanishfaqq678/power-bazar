@@ -18,12 +18,26 @@ import { PRODUCT_IMAGE_BUCKET } from "@/config/site";
 
 const PRODUCT_SELECT = "*, category:categories(id, name, slug)";
 
+function logSupabaseFailure(operation: string, error: unknown) {
+  const message =
+    error instanceof Error
+      ? error.message
+      : typeof error === "object" && error !== null && "message" in error
+        ? String((error as { message?: string }).message)
+        : "Unknown error";
+
+  console.error(`[Power Bazar API] ${operation} failed: ${message}`);
+}
+
 export async function fetchCategories(): Promise<Category[]> {
   const { data, error } = await supabase
     .from("categories")
     .select("*")
     .order("sort_order", { ascending: true });
-  if (error) throw error;
+  if (error) {
+    logSupabaseFailure("fetchCategories", error);
+    throw error;
+  }
   return (data ?? []) as unknown as Category[];
 }
 
@@ -33,7 +47,10 @@ export async function fetchCategoryBySlug(slug: string): Promise<Category | null
     .select("*")
     .eq("slug", slug)
     .maybeSingle();
-  if (error) throw error;
+  if (error) {
+    logSupabaseFailure("fetchCategoryBySlug", error);
+    throw error;
+  }
   return (data as unknown as Category) ?? null;
 }
 
@@ -48,7 +65,10 @@ export async function fetchProducts(options?: {
   query = query.order("created_at", { ascending: true });
   if (options?.limit) query = query.limit(options.limit);
   const { data, error } = await query;
-  if (error) throw error;
+  if (error) {
+    logSupabaseFailure("fetchProducts", error);
+    throw error;
+  }
   return (data ?? []) as unknown as Product[];
 }
 
@@ -58,7 +78,10 @@ export async function fetchProductBySlug(slug: string): Promise<Product | null> 
     .select(PRODUCT_SELECT)
     .eq("slug", slug)
     .maybeSingle();
-  if (error) throw error;
+  if (error) {
+    logSupabaseFailure("fetchProductBySlug", error);
+    throw error;
+  }
   return (data as unknown as Product) ?? null;
 }
 
@@ -68,7 +91,10 @@ export async function fetchProductById(id: string): Promise<Product | null> {
     .select(PRODUCT_SELECT)
     .eq("id", id)
     .maybeSingle();
-  if (error) throw error;
+  if (error) {
+    logSupabaseFailure("fetchProductById", error);
+    throw error;
+  }
   return (data as unknown as Product) ?? null;
 }
 
@@ -78,7 +104,10 @@ export async function fetchProductImages(productId: string): Promise<ProductImag
     .select("*")
     .eq("product_id", productId)
     .order("sort_order", { ascending: true });
-  if (error) throw error;
+  if (error) {
+    logSupabaseFailure("fetchProductImages", error);
+    throw error;
+  }
   return (data ?? []) as unknown as ProductImage[];
 }
 
@@ -92,7 +121,10 @@ export async function fetchRelatedProducts(
     .eq("category_id", product.category_id)
     .neq("id", product.id)
     .limit(4);
-  if (error) throw error;
+  if (error) {
+    logSupabaseFailure("fetchRelatedProducts", error);
+    throw error;
+  }
   return (data ?? []) as unknown as Product[];
 }
 
