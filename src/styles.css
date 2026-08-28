@@ -130,11 +130,29 @@
     /* Keep the accent selection background in line with brand — use system highlight fallback */
     background-color: Highlight;
     color: #000 !important;
+    -webkit-text-fill-color: #000 !important;
   }
 
   /* Also support Firefox older selector */
   ::-moz-selection {
     background-color: Highlight;
+    color: #000 !important;
+  }
+
+  /* Strong, scoped overrides for the AI assistant card and other white cards where text may be light.
+     This forces readable black text on selection even if a component or browser sets a different style. */
+  .max-w-3xl ::selection,
+  .bg-white ::selection,
+  .container-pb ::selection {
+    background-color: var(--color-primary) !important;
+    color: #000 !important;
+    -webkit-text-fill-color: #000 !important;
+  }
+
+  .max-w-3xl ::-moz-selection,
+  .bg-white ::-moz-selection,
+  .container-pb ::-moz-selection {
+    background-color: var(--color-primary) !important;
     color: #000 !important;
   }
 }
