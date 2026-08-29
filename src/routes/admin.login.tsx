@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Eye, EyeOff, ShieldCheck } from "lucide-react";
 import logo from "@/assets/power-bazar-logo.png";
@@ -47,7 +47,18 @@ function AdminLoginPage() {
     setIsSubmitting(true);
     const result = await validateDemoAdminLogin(username, password);
     if (!result.ok) {
-      setError(result.message);
+      const friendlyMessage =
+        result.code === "ADMIN_NOT_CONFIGURED"
+          ? "Access is temporarily unavailable. Please contact your administrator."
+          : result.code === "INVALID_CREDENTIALS"
+            ? "Invalid username or password."
+            : result.code === "INVALID_INPUT"
+              ? "Enter both your username and password."
+              : result.code === "SERVER_ERROR"
+                ? "Unable to verify credentials right now. Please try again."
+                : result.message;
+
+      setError(friendlyMessage);
       setIsSubmitting(false);
       return;
     }
