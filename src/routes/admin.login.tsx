@@ -44,12 +44,14 @@ function AdminLoginPage() {
       return;
     }
 
-    if (!validateDemoAdminLogin(username, password)) {
+    setIsSubmitting(true);
+    const valid = await validateDemoAdminLogin(username, password);
+    if (!valid) {
       setError("Invalid username or password.");
+      setIsSubmitting(false);
       return;
     }
 
-    setIsSubmitting(true);
     signInAdminDemo();
     navigate({ to: "/admin/dashboard" });
     setIsSubmitting(false);
