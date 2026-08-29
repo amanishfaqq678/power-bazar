@@ -45,9 +45,9 @@ function AdminLoginPage() {
     }
 
     setIsSubmitting(true);
-    const valid = await validateDemoAdminLogin(username, password);
-    if (!valid) {
-      setError("Invalid username or password.");
+    const result = await validateDemoAdminLogin(username, password);
+    if (!result.ok) {
+      setError(result.message);
       setIsSubmitting(false);
       return;
     }
