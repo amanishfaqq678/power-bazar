@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AiAssistantRouteImport } from './routes/ai-assistant'
+import { Route as EntryRouteImport } from './routes/entry'
+import { Route as HomeRouteImport } from './routes/home'
 import { Route as RequestQuoteRouteImport } from './routes/request-quote'
 import { Route as SupportRouteImport } from './routes/support'
 import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
@@ -34,6 +36,16 @@ const AboutRoute = AboutRouteImport.update({
 const AiAssistantRoute = AiAssistantRouteImport.update({
   id: '/ai-assistant',
   path: '/ai-assistant',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EntryRoute = EntryRouteImport.update({
+  id: '/entry',
+  path: '/entry',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HomeRoute = HomeRouteImport.update({
+  id: '/home',
+  path: '/home',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RequestQuoteRoute = RequestQuoteRouteImport.update({
@@ -81,6 +93,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/ai-assistant': typeof AiAssistantRoute
+  '/entry': typeof EntryRoute
+  '/home': typeof HomeRoute
   '/request-quote': typeof RequestQuoteRoute
   '/support': typeof SupportRoute
   '/admin/dashboard': typeof AdminDashboardRoute
@@ -94,6 +108,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/ai-assistant': typeof AiAssistantRoute
+  '/entry': typeof EntryRoute
+  '/home': typeof HomeRoute
   '/request-quote': typeof RequestQuoteRoute
   '/support': typeof SupportRoute
   '/admin/dashboard': typeof AdminDashboardRoute
@@ -108,6 +124,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/ai-assistant': typeof AiAssistantRoute
+  '/entry': typeof EntryRoute
+  '/home': typeof HomeRoute
   '/request-quote': typeof RequestQuoteRoute
   '/support': typeof SupportRoute
   '/admin/dashboard': typeof AdminDashboardRoute
@@ -123,6 +141,8 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/ai-assistant'
+    | '/entry'
+    | '/home'
     | '/request-quote'
     | '/support'
     | '/admin/dashboard'
@@ -136,6 +156,8 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/ai-assistant'
+    | '/entry'
+    | '/home'
     | '/request-quote'
     | '/support'
     | '/admin/dashboard'
@@ -149,6 +171,8 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/ai-assistant'
+    | '/entry'
+    | '/home'
     | '/request-quote'
     | '/support'
     | '/admin/dashboard'
@@ -163,6 +187,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AiAssistantRoute: typeof AiAssistantRoute
+  EntryRoute: typeof EntryRoute
+  HomeRoute: typeof HomeRoute
   RequestQuoteRoute: typeof RequestQuoteRoute
   SupportRoute: typeof SupportRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
@@ -194,6 +220,20 @@ declare module '@tanstack/react-router' {
       path: '/ai-assistant'
       fullPath: '/ai-assistant'
       preLoaderRoute: typeof AiAssistantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/entry': {
+      id: '/entry'
+      path: '/entry'
+      fullPath: '/entry'
+      preLoaderRoute: typeof EntryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/home': {
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/request-quote': {
@@ -259,6 +299,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AiAssistantRoute: AiAssistantRoute,
+  EntryRoute: EntryRoute,
+  HomeRoute: HomeRoute,
   RequestQuoteRoute: RequestQuoteRoute,
   SupportRoute: SupportRoute,
   AdminDashboardRoute: AdminDashboardRoute,

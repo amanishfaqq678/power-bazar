@@ -72,10 +72,10 @@ function AdminLoginPage() {
     <div className="min-h-screen bg-[#f5f5f1] px-4 py-8 text-foreground sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <div className="mb-6 flex items-center justify-between">
-          <Link to="/" className="inline-flex items-center gap-3" aria-label="Power Bazar home">
+          <Link to="/home" className="inline-flex items-center gap-3" aria-label="Power Bazar home">
             <img src={logo} alt="Power Bazar" className="h-11 w-auto" />
           </Link>
-          <Link to="/" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
+          <Link to="/home" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
             Back to site
           </Link>
         </div>

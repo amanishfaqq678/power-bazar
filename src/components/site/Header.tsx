@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Menu, Search, Sparkles, X, FileText } from "lucide-react";
+import { ArrowLeftRight, Menu, Search, Sparkles, X, FileText } from "lucide-react";
 import logo from "@/assets/power-bazar-logo.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,7 +8,7 @@ import { useQuoteBasket } from "@/lib/quote-basket";
 import { cn } from "@/lib/utils";
 
 const NAV = [
-  { label: "Home", to: "/" },
+{ label: "Home", to: "/home" },
   { label: "Products", to: "/products" },
   { label: "Categories", to: "/categories" },
   { label: "About", to: "/about" },
@@ -45,7 +45,7 @@ export function Header() {
       )}
     >
       <div className="container-pb flex h-18 items-center justify-between gap-4 py-3">
-        <Link to="/" className="flex shrink-0 items-center" aria-label="Power Bazar home">
+        <Link to="/home" className="flex shrink-0 items-center" aria-label="Power Bazar home">
           <img
             src={logo}
             alt="Power Bazar — Powering Your World"
@@ -78,6 +78,13 @@ export function Header() {
             onClick={() => setSearchOpen((open) => !open)}
           >
             <Search className="size-5" aria-hidden="true" />
+          </Button>
+
+          <Button asChild variant="ghost" className="hidden font-bold lg:inline-flex">
+            <Link to="/">
+              <ArrowLeftRight className="size-4" aria-hidden="true" />
+              Switch Experience
+            </Link>
           </Button>
 
           <Button asChild variant="ghost" className="hidden font-bold lg:inline-flex">
@@ -140,12 +147,13 @@ export function Header() {
         <div className="border-t border-border bg-background lg:hidden">
           <nav aria-label="Mobile" className="container-pb flex flex-col py-3">
             {[
-              { label: "Home", to: "/" },
+             { label: "Home", to: "/home" },
               { label: "Products", to: "/products" },
               { label: "Categories", to: "/categories" },
               { label: "AI Product Assistant", to: "/ai-assistant" },
-              { label: "About", to: "/about" },
-              { label: "Support", to: "/support" },
+             { label: "Switch Experience", to: "/" },
+             { label: "About", to: "/about" },
+             { label: "Support", to: "/support" },
             ].map((item) => (
               <Link
                 key={item.to}

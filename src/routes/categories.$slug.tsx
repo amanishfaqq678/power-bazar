@@ -109,7 +109,7 @@ function CategoryPage() {
         {...(category.description ? { description: category.description } : {})}
       >
         <nav aria-label="Breadcrumb" className="mt-6 text-sm text-muted-foreground">
-          <Link to="/" className="hover:text-primary">
+          <Link to="/home" className="hover:text-primary">
             Home
           </Link>
           <span aria-hidden="true"> / </span>

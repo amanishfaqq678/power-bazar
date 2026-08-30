@@ -70,7 +70,7 @@ function AdminDashboardPage() {
   const sidebarContent = (
     <aside className="flex h-full flex-col border-r border-border bg-[#f8f8f5]">
       <div className="flex h-20 items-center justify-between border-b border-border px-5">
-        <Link to="/" className="flex items-center gap-3" aria-label="Power Bazar home">
+        <Link to="/home" className="flex items-center gap-3" aria-label="Power Bazar home">
           <img src={logo} alt="Power Bazar" className="h-10 w-auto" />
         </Link>
         <Button
@@ -146,7 +146,7 @@ function AdminDashboardPage() {
       <div className="md:hidden">
         <div className="border-b border-border bg-white px-4 py-3">
           <div className="flex items-center justify-between gap-3">
-            <Link to="/" aria-label="Power Bazar home" className="flex items-center">
+            <Link to="/home" aria-label="Power Bazar home" className="flex items-center">
               <img src={logo} alt="Power Bazar" className="h-9 w-auto" />
             </Link>
             <Button
@@ -172,7 +172,7 @@ function AdminDashboardPage() {
               <p className="mt-2 text-sm text-muted-foreground">Manage your business from one place.</p>
             </div>
             <Button asChild variant="outline" className="rounded-full font-bold">
-              <Link to="/">View public site</Link>
+              <Link to="/home">View public site</Link>
             </Button>
           </div>
         </div>
